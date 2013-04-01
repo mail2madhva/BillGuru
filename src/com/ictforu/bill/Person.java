@@ -29,6 +29,10 @@ public class Person implements Serializable{
 		this.email = email;
 	}
 	
+	public String toString() {
+		return name + " " + email;
+	}
+	
 	
 
 }

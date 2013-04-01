@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -31,14 +32,14 @@ public class MainFrame extends JFrame {
 			PersonList listRead = (PersonList) is.readObject();
 			PersonList.getPersonList().setPersonList(
 					listRead.getPersonListArray());
-			Iterator<Person> per = PersonList.getPersonList()
-					.getPersonListArray().iterator();
-			while (per.hasNext()) {
-				System.out.println(per.next().getEmail());
+			DefaultListModel<Person> per = PersonList.getPersonList()
+					.getPersonListArray();
+			for(int i=0; i < per.getSize(); i++) {
+				System.out.println(per.get(i).toString());
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			PersonList.getPersonList();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

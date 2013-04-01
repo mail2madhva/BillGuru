@@ -3,9 +3,11 @@ package com.ictforu.bill;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
+
 public class PersonList implements Serializable {
 	
-	private ArrayList<Person> list = new ArrayList<Person>();
+	private DefaultListModel<Person> list = new DefaultListModel();
 	private static volatile PersonList personList; 
 	
 	private PersonList() {
@@ -19,18 +21,18 @@ public class PersonList implements Serializable {
 	}
 	
 	public void addPerson(Person p) {
-		if (p != null) list.add(p);
+		if (p != null) list.addElement(p);
 	}
 	
 	public void removePerson(Person p) {
-		if (p != null) list.remove(p);
+		if (p != null) list.removeElement(p);
 	}
 
-	public void setPersonList(ArrayList<Person> list) {
+	public void setPersonList(DefaultListModel<Person> list) {
 		this.list = list;
 	}
 	
-	public ArrayList<Person> getPersonListArray() {
+	public DefaultListModel<Person> getPersonListArray() {
 		return this.list;
 	}
 	

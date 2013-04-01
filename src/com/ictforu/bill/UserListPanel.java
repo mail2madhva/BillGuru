@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 
 public class UserListPanel extends JPanel {
 
-	DefaultListModel<String> model = new DefaultListModel();
+	DefaultListModel<Person> model = null;
 
 	/**
 	 * Create the panel.
@@ -43,6 +43,8 @@ public class UserListPanel extends JPanel {
 		gbc_headerLabel.gridx = 0;
 		gbc_headerLabel.gridy = 0;
 		add(headerLabel, gbc_headerLabel);
+		refreshModel();
+
 		JList user_list = new JList(model);
 		user_list.setVisibleRowCount(10);
 		user_list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -53,7 +55,6 @@ public class UserListPanel extends JPanel {
 		gbc_user_list.gridy = 1;
 		add(user_list, gbc_user_list);
 		System.out.println("Refresh from list called");
-		refreshModel();
 
 		addFocusListener(new FocusListener() {
 
@@ -72,16 +73,8 @@ public class UserListPanel extends JPanel {
 	}
 
 	private void refreshModel() {
-		Iterator<Person> personIterator = PersonList.getPersonList()
-				.getPersonListArray().iterator();
-		Person per = null;
-		while (personIterator.hasNext()) {
-			per = personIterator.next();
-			String person = per.getName() + " " + per.getEmail();
-			System.out.println("Items ssss - " + person);
-
-			model.addElement(person);
-		}
-		model.addElement("1");
+		DefaultListModel<Person> personIterator = PersonList.getPersonList()
+				.getPersonListArray();
+		model = personIterator;
 	}
 }
