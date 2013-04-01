@@ -27,21 +27,22 @@ public class UserListPanel extends JPanel {
 	 */
 	public UserListPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{191, 63, 1, 0};
-		gridBagLayout.rowHeights = new int[]{15, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 191, 63, 1, 0 };
+		gridBagLayout.rowHeights = new int[] { 15, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
-				JLabel headerLabel = new JLabel("User List");
-				headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				GridBagConstraints gbc_headerLabel = new GridBagConstraints();
-				gbc_headerLabel.fill = GridBagConstraints.HORIZONTAL;
-				gbc_headerLabel.anchor = GridBagConstraints.NORTHWEST;
-				gbc_headerLabel.insets = new Insets(0, 0, 0, 5);
-				gbc_headerLabel.gridx = 0;
-				gbc_headerLabel.gridy = 0;
-				add(headerLabel, gbc_headerLabel);
+
+		JLabel headerLabel = new JLabel("User List");
+		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_headerLabel = new GridBagConstraints();
+		gbc_headerLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_headerLabel.anchor = GridBagConstraints.NORTHWEST;
+		gbc_headerLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_headerLabel.gridx = 0;
+		gbc_headerLabel.gridy = 0;
+		add(headerLabel, gbc_headerLabel);
 		JList user_list = new JList(model);
 		user_list.setVisibleRowCount(10);
 		user_list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
