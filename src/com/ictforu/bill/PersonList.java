@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class PersonList implements Serializable {
 	
 	private ArrayList<Person> list = new ArrayList<Person>();
-	private static PersonList personList; 
+	private static volatile PersonList personList; 
 	
 	private PersonList() {
 	}
@@ -30,5 +30,8 @@ public class PersonList implements Serializable {
 		this.list = list;
 	}
 	
+	public ArrayList<Person> getPersonListArray() {
+		return this.list;
+	}
 	
 }

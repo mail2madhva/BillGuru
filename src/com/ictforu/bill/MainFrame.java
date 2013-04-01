@@ -1,40 +1,58 @@
 package com.ictforu.bill;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JToolBar;
 import javax.swing.JTabbedPane;
-import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import javax.swing.border.EmptyBorder;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
+	
+	private static void refreshModel() {
+		String filename = "data.bin";
+		ObjectInputStream is;
+		try {
+			is = new ObjectInputStream(new FileInputStream(filename));
+			PersonList listRead = (PersonList) is.readObject();
+			PersonList.getPersonList().setPersonList(listRead.getPersonListArray());
+			Iterator<Person> per = PersonList.getPersonList().getPersonListArray().iterator();
+			while(per.hasNext()){
+				System.out.println(per.next().getEmail());
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		refreshModel();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -65,7 +83,6 @@ public class MainFrame extends JFrame {
 							
 						}
 						
-						@Override
 						public void windowClosing(WindowEvent arg0) {
 							String filename = "data.bin";
 							try {
@@ -78,10 +95,9 @@ public class MainFrame extends JFrame {
 								e.printStackTrace();
 							}	
 							System.out.println("Done writing ");
-							System.exit(0);							
+							System.exit(0);			
 						}
 						
-						@Override
 						public void windowClosed(WindowEvent arg0) {
 
 						}
@@ -120,7 +136,7 @@ public class MainFrame extends JFrame {
 //		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 //		tabbedPane.add("Add Users", pane);
 		
-		JPanel userAddPanel = new UserAdd();
+		JPanel userAddPanel = new UserAddPane();
 		tabbedPane.add("Add Users",userAddPanel);
 		
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
@@ -131,9 +147,9 @@ public class MainFrame extends JFrame {
 		contentPane.add(tabbedPane, gbc_tabbedPane);
 		
 		
+		JPanel userListPanel = new UserListPanel();
+		tabbedPane.add("List Users",userListPanel);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		tabbedPane.addTab("List Users", null, scrollPane, null);
 	}
 
 }
