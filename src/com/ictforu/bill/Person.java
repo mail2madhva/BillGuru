@@ -30,7 +30,7 @@ public class Person implements Serializable{
 	}
 	
 	public String toString() {
-		return name + " " + email;
+		return " " + name + " --- " + email;
 	}
 	
 	
